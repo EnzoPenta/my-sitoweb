@@ -647,15 +647,15 @@
                 </form>
 
                 <div class="social-links">
-                    <a href="enzo3dtech@gmail.com" class="social-link">
+                    <a href="mailto:enzo3dtech@gmail.com" class="social-link" target="_blank">
                         <span>📧</span>
                         <span>Email</span>
                     </a>
-                    <a href="#" class="social-link" onclick="alert('https://www.instagram.com/enzo3dtech?igsh=OGxiMHZiMGhoaXEw'); return false;">
+                    <a href="https://www.instagram.com/enzo3dtech?igsh=OGxiMHZiMGhoaXEw" class="social-link" target="_blank" rel="noopener noreferrer">
                         <span>📷</span>
                         <span>Instagram</span>
                     </a>
-                    <a href="#" class="social-link" onclick="alert('https://www.facebook.com/share/1DmbpZKqo5/'); return false;">
+                    <a href="https://www.facebook.com/share/1DmbpZKqo5/" class="social-link" target="_blank" rel="noopener noreferrer">
                         <span>👥</span>
                         <span>Facebook</span>
                     </a>
@@ -705,7 +705,7 @@
             };
 
             // Create mailto link
-            const mailtoLink = `mailto:tuaemail@esempio.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+            const mailtoLink = `mailto:enzo3dtech@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
                 `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMessaggio:\n${formData.message}`
             )}`;
             
