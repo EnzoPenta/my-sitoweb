@@ -643,11 +643,15 @@
                         <label for="message">Messaggio *</label>
                         <textarea id="message" name="message" required placeholder="Descrivi il tuo progetto..."></textarea>
                     </div>
-                    <button type="submit" class="submit-button">Invia Richiesta 📨</button>
+                    <button type="submit" class="submit-button">Invia su WhatsApp 💬</button>
                 </form>
 
                 <div class="social-links">
-                    <a href="mailto:enzo3dtech@gmail.com" class="social-link" target="_blank">
+                    <a href="https://wa.me/393881824964" class="social-link" target="_blank" rel="noopener noreferrer">
+                        <span>💬</span>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="#" class="social-link" onclick="copyEmail(event)">
                         <span>📧</span>
                         <span>Email</span>
                     </a>
@@ -671,6 +675,30 @@
     </footer>
 
     <script>
+        // Copy email to clipboard
+        function copyEmail(event) {
+            event.preventDefault();
+            const email = 'enzo3dtech@gmail.com';
+            
+            // Try to copy to clipboard
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(() => {
+                    alert('✅ Email copiata negli appunti!\n' + email + '\n\nOra puoi incollarla dove vuoi!');
+                }).catch(() => {
+                    // Fallback if clipboard API fails
+                    showEmailFallback(email);
+                });
+            } else {
+                // Fallback for older browsers
+                showEmailFallback(email);
+            }
+        }
+        
+        function showEmailFallback(email) {
+            const message = 'La mia email è:\n\n' + email + '\n\nCopiala manualmente!';
+            alert(message);
+        }
+
         // Toggle mobile menu
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
@@ -704,14 +732,18 @@
                 message: document.getElementById('message').value
             };
 
-            // Create mailto link
-            const mailtoLink = `mailto:enzo3dtech@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-                `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMessaggio:\n${formData.message}`
-            )}`;
+            // Create WhatsApp message
+            const whatsappMessage = `🖨️ *Richiesta Stampa 3D*\n\n` +
+                `👤 *Nome:* ${formData.name}\n` +
+                `📧 *Email:* ${formData.email}\n` +
+                `📋 *Oggetto:* ${formData.subject}\n\n` +
+                `💬 *Messaggio:*\n${formData.message}`;
             
-            window.location.href = mailtoLink;
+            // WhatsApp link
+            const whatsappLink = `https://wa.me/393881824964?text=${encodeURIComponent(whatsappMessage)}`;
             
-            alert('Ti ringrazio per il contatto! Si aprirà il tuo client email.');
+            // Open WhatsApp
+            window.open(whatsappLink, '_blank');
         }
 
         // Scroll animations
