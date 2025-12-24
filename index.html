@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzo Pentassuglia - Stampa 3D | Fasano, Puglia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent-blue: #4facfe;
+            --accent-green: #43e97b;
+            --accent-yellow: #ffd93d;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* Header e Navigazione */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/><path fill="%23764ba2" opacity="0.3" d="M0 300 Q300 150 600 300 T1200 300 V600 H0 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+            border-radius: 2px;
+        }
+
+        /* Chi Sono */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(67, 233, 123, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .printer-icon {
+            font-size: 8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Servizi */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent-blue);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-item p {
+            color: var(--text-light);
+        }
+
+        /* App Section */
+        .app-showcase {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+        }
+
+        .app-showcase h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-showcase p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .app-badge {
+            display: inline-block;
+            background: white;
+            color: var(--accent-blue);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .app-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contatti */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">🖨️ Enzo Pentassuglia</a>
+            <button class="mobile-menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chi-sono">Chi Sono</a></li>
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#app">App</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Stampa 3D Professionale</h1>
+        <p>Trasformo le tue idee in realtà con precisione e qualità</p>
+        <div class="hero-location">
+            <span>📍</span>
+            <span>Fasano, Puglia</span>
+        </div>
+        <a href="#contatti" class="cta-button">Richiedi un Preventivo</a>
+    </section>
+
+    <div class="container">
+        <!-- Chi Sono -->
+        <section id="chi-sono">
+            <h2>Chi Sono</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Ciao, sono Enzo! 👋</h3>
+                    <p>
+                        La mia passione per la stampa 3D è iniziata circa 2 anni fa durante il periodo scolastico, 
+                        dove ho scoperto le infinite possibilità di questa tecnologia. Da quel momento ho continuato 
+                        ad apprendere e perfezionare le mie competenze in modo autodidatta.
+                    </p>
+                    <p>
+                        Sono appassionato di <strong>tecnologia, elettronica e del mondo delle macchine</strong>. 
+                        Mi specializzo nella creazione di <strong>pezzi funzionali</strong>, supporti personalizzati, 
+                        basi d'appoggio e soluzioni su misura per diverse esigenze.
+                    </p>
+                    <p>
+                        Attualmente sto approfondendo le mie conoscenze di <strong>CAD e progettazione 3D</strong> 
+                        per offrire servizi sempre più professionali e precisi. Collaboro con aziende di 
+                        videosorveglianza per la realizzazione di supporti tecnici specializzati.
+                    </p>
+                    <div class="skills">
+                        <span class="skill-tag">🖨️ Stampa 3D FDM</span>
+                        <span class="skill-tag">⚙️ Pezzi Funzionali</span>
+                        <span class="skill-tag">📐 Progettazione CAD</span>
+                        <span class="skill-tag">🔧 Supporti Tecnici</span>
+                        <span class="skill-tag">📹 Videosorveglianza</span>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="printer-icon">🖨️</div>
+                    <h3 style="color: var(--primary);">Elegoo FDM</h3>
+                    <p style="color: var(--text-light);">Tecnologia di stampa professionale per risultati di qualità</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servizi -->
+        <section id="servizi">
+            <h2>I Miei Servizi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Pezzi Funzionali</h3>
+                    <p>Realizzo componenti tecnici su misura per le tue esigenze specifiche, con precisione e attenzione ai dettagli.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Supporti e Basi</h3>
+                    <p>Supporti personalizzati, basi d'appoggio e soluzioni organizzative per ottimizzare i tuoi spazi.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📹</div>
+                    <h3>Supporti per Videosorveglianza</h3>
+                    <p>Collaborazioni con aziende per supporti tecnici specializzati per sistemi di videosorveglianza.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎁</div>
+                    <h3>Gadget Personalizzati</h3>
+                    <p>Portachiavi, oggetti decorativi e gadget personalizzati per occasioni speciali o regali unici.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Prototipi e Modelli</h3>
+                    <p>Trasformo le tue idee in prototipi fisici per testare e visualizzare i tuoi progetti.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Consulenza Tecnica</h3>
+                    <p>Ti aiuto a capire se la stampa 3D è la soluzione giusta per il tuo progetto e come realizzarlo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio">
+            <h2>Esempi di Progetti</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-icon">🔩</div>
+                    <h3>Componenti Meccanici</h3>
+                    <p>Ingranaggi, giunti e parti di ricambio personalizzate</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon">📱</div>
+                    <h3>Supporti Tecnici</h3>
+                    <p>Staffe per telecamere e dispositivi elettronici</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon">🎨</div>
+                    <h3>Organizer</h3>
+                    <p>Contenitori e soluzioni per l'organizzazione degli spazi</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon">🔑</div>
+                    <h3>Portachiavi Custom</h3>
+                    <p>Design unici e personalizzati per ogni occasione</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon">⚙️</div>
+                    <h3>Prototipi</h3>
+                    <p>Modelli di prova per validare idee e progetti</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-icon">🏠</div>
+                    <h3>Soluzioni Domestiche</h3>
+                    <p>Accessori e utilità per la casa su misura</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Section -->
+        <section id="app">
+            <div class="app-showcase">
+                <h3>📱 Calcolatore Preventivi Stampa 3D</h3>
+                <p>Presto disponibile la mia app per calcolare rapidamente il costo della tua stampa 3D!</p>
+                <p style="font-size: 1rem; opacity: 0.9;">
+                    Inserisci i parametri del tuo progetto (dimensioni, materiale, tempo di stampa) 
+                    e ottieni un preventivo immediato e trasparente.
+                </p>
+                <span class="app-badge">🚀 In Sviluppo</span>
+            </div>
+        </section>
+
+        <!-- Contatti -->
+        <section id="contatti">
+            <h2>Contattami</h2>
+            <div class="contact-content">
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Nome *</label>
+                        <input type="text" id="name" name="name" required placeholder="Il tuo nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="tua@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Oggetto *</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Di cosa hai bisogno?">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Messaggio *</label>
+                        <textarea id="message" name="message" required placeholder="Descrivi il tuo progetto..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Invia Richiesta 📨</button>
+                </form>
+
+                <div class="social-links">
+                    <a href="enzo3dtech@gmail.com" class="social-link">
+                        <span>📧</span>
+                        <span>Email</span>
+                    </a>
+                    <a href="#" class="social-link" onclick="alert('//www.instagram.com/enzo3dtech?igsh=OGxiMHZiMGhoaXEw'); return false;">
+                        <span>📷</span>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-link" onclick="alert('//www.facebook.com/share/1DmbpZKqo5/'); return false;">
+                        <span>👥</span>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Enzo Pentassuglia - Stampa 3D | Fasano, Puglia</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Realizzato con passione per la tecnologia 🚀</p>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu after click
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Create mailto link
+            const mailtoLink = `mailto:tuaemail@esempio.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+                `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMessaggio:\n${formData.message}`
+            )}`;
+            
+            window.location.href = mailtoLink;
+            
+            alert('Ti ringrazio per il contatto! Si aprirà il tuo client email.');
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
